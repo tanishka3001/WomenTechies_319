@@ -33,9 +33,9 @@ export default function ApiUploader() {
           scaleMobile: 1.0,
           color: 0x16eae5,
           backgroundColor: 0x0,
-          points: 9.0,
+          points: 12.0,
           maxDistance: 18.0,
-          spacing: 17.0,
+          spacing: 15.0,
         });
       }
     };

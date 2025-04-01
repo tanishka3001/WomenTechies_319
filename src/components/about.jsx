@@ -1,13 +1,14 @@
 import React from "react";
 
 export default function About() {
+  
   return (
-    <section id="about" className="py-16 bg-gray-50">
+    <section id="about" className="py-16 bg-black">
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* About Title & Description */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-extrabold text-gray-900">About Code to UI</h2>
-          <p className="mt-4 text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
+          <h2 className="text-4xl font-extrabold text-[#8cf5e2]">About Code to UI</h2>
+          <p className="mt-4 text-lg text-[#8cf5e2] leading-relaxed max-w-3xl mx-auto">
             Code to UI is a powerful tool designed to simplify frontend development by 
             automatically converting OpenAPI/Swagger specifications into fully functional React components.
           </p>
@@ -35,8 +36,8 @@ export default function About() {
 
         {/* Final Call-to-Action Section */}
         <div className="mt-16 text-center">
-          <h3 className="text-3xl font-extrabold text-gray-900">Join Us in Making Development Easier</h3>
-          <p className="mt-4 text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
+          <h3 className="text-3xl font-extrabold text-[#8cf5e2]">Join Us in Making Development Easier</h3>
+          <p className="mt-4 text-lg text-[#8cf5e2] leading-relaxed max-w-3xl mx-auto">
             We're continually working to enhance the tool, adding more features and improving its 
             usability to help developers save time and effort in building frontend applications.
           </p>

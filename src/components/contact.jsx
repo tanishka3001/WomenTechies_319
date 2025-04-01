@@ -36,12 +36,12 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gray-50">
+    <section id="contact" className="py-20 bg-black">
       <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Section Heading */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-extrabold text-gray-900">Contact Us</h2>
-          <p className="mt-4 text-lg text-gray-600">
+          <h2 className="text-4xl font-extrabold text-[#8cf5e2]">Contact Us</h2>
+          <p className="mt-4 text-lg text-[#8cf5e2]">
             Have any questions or feedback? We'd love to hear from you.
           </p>
         </div>
@@ -115,7 +115,7 @@ export default function Contact() {
               <div className="text-center">
                 <button
                   type="submit"
-                  className="w-full py-3 bg-[#0A2540] text-white font-semibold rounded-lg hover:bg-blue-700 transition"
+                  className="w-full py-3 bg-[#287063] text-white font-semibold rounded-lg hover:bg-blue-700 transition"
                 >
                   Send Message
                 </button>
@@ -126,10 +126,10 @@ export default function Contact() {
 
         {/* Additional Contact Info */}
         <div className="mt-16 text-center">
-          <h3 className="text-2xl font-extrabold text-gray-900">
+          <h3 className="text-lg text-[#8cf5e2]">
             Other Ways to Reach Us
           </h3>
-          <p className="mt-4 text-lg text-gray-600">
+          <p className="mt-4 text-lg text-[#8cf5e2]">
             You can also reach us via email at{" "}
             <strong className="text-blue-600">support@codetoui.com</strong> or follow us on social media.
           </p>
