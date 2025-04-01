@@ -1,12 +1,16 @@
-import { useState, useEffect, useRef } from "react";
-
+import { useState } from "react";
+import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 export default function ApiUploader() {
+  const navigate= useNavigate();
   const backgroundRef = useRef(null);
   const [showMenu, setShowMenu] = useState(false);
   const [file, setFile] = useState(null);
   const [jsonData, setJsonData] = useState(null);
   const [error, setError] = useState(null);
   const [dragging, setDragging] = useState(false);
+  const [apiEndpoints, setApiEndpoints] = useState([]);
 
   useEffect(() => {
     const threeScript = document.createElement("script");
@@ -62,12 +66,34 @@ export default function ApiUploader() {
     };
     reader.readAsText(uploadedFile);
   };
+const uploadFile=async(uploadedFile)=>{
+  const formData = new FormData();
+  formData.append("file", uploadedFile); // Append the file to FormData
 
+  try {
+    const response = await axios.post("http://localhost:4000/upload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    if(response.status===200)
+      console.log(response.data.apiData);
+    alert("File Uploaded Successfully");
+    setApiEndpoints(response.data.apiData.endpoints);
+    console.log(apiEndpoints);
+    
+  }
+    catch(err){
+      console.log(err);
+    }
+
+};
   const handleFileUpload = (e) => {
     const uploadedFile = e.target.files[0];
     if (uploadedFile) {
       setFile(uploadedFile);
       handleFileRead(uploadedFile);
+      uploadFile(uploadedFile);
     }
   };
 
@@ -153,7 +179,8 @@ export default function ApiUploader() {
               <pre className="text-xs">{JSON.stringify(jsonData, null, 2)}</pre>
             </div>
           )}
-          <button className="w-full bg-[#287063] text-white py-2 px-4 rounded-md hover:bg-[#1e594d] transition">
+          {/* Added Button */}
+          <button onClick={() => navigate("/apiList",{ state: { apiEndpoints }})} className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition">
             Process JSON
           </button>
         </div>
