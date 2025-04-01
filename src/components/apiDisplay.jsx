@@ -4,6 +4,7 @@ export default function ApiDisplay() {
   const location = useLocation();
   const navigate = useNavigate();
   const api = location.state?.api;
+  const apiEndpoints=location.state?.apiEndpoints;
 
   if (!api) {
     return (
@@ -50,7 +51,7 @@ export default function ApiDisplay() {
       </div>
 
       <button 
-        onClick={() => navigate("/apiList")} 
+        onClick={() => navigate("/apiList",{state:{apiEndpoints}})} 
         className="mt-6 p-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
       >
         Back to API List

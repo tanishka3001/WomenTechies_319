@@ -77,10 +77,10 @@ const uploadFile=async(uploadedFile)=>{
       },
     });
     if(response.status===200)
-      console.log(response.data.apiData);
+      console.log(response.data.apiData.endpoints);
     alert("File Uploaded Successfully");
     setApiEndpoints(response.data.apiData.endpoints);
-    console.log(apiEndpoints);
+    //console.log(apiEndpoints);
     
   }
     catch(err){
