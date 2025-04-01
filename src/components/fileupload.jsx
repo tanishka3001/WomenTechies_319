@@ -5,6 +5,11 @@ import axios from "axios";
 export default function ApiUploader() {
   const navigate= useNavigate();
   const backgroundRef = useRef(null);
+  const [showMenu, setShowMenu] = useState(false);
+  const [file, setFile] = useState(null);
+  const [jsonData, setJsonData] = useState(null);
+  const [error, setError] = useState(null);
+  const [dragging, setDragging] = useState(false);
   const [apiEndpoints, setApiEndpoints] = useState([]);
 
   useEffect(() => {
@@ -17,11 +22,6 @@ export default function ApiUploader() {
     vantaScript.src = "https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js";
     vantaScript.async = true;
     document.body.appendChild(vantaScript);
-
-    const finisherScript = document.createElement("script");
-    finisherScript.src = "finisher-header.es5.min.js";
-    finisherScript.async = true;
-    document.body.appendChild(finisherScript);
 
     vantaScript.onload = () => {
       if (window.VANTA && window.VANTA.NET && backgroundRef.current) {
@@ -46,20 +46,11 @@ export default function ApiUploader() {
     return () => {
       document.body.removeChild(threeScript);
       document.body.removeChild(vantaScript);
-      document.body.removeChild(finisherScript);
       if (window.VANTA && window.VANTA.NET) {
         window.VANTA.NET().destroy();
       }
-      if (window.FinisherHeader) {
-        window.FinisherHeader.destroy();
-      }
     };
   }, []);
-
-  const [file, setFile] = useState(null);
-  const [jsonData, setJsonData] = useState(null);
-  const [error, setError] = useState(null);
-  const [dragging, setDragging] = useState(false);
 
   const handleFileRead = (uploadedFile) => {
     const reader = new FileReader();
@@ -117,19 +108,41 @@ const uploadFile=async(uploadedFile)=>{
   };
 
   return (
-    <div ref={backgroundRef} className="w-full h-screen overflow-x-hidden">
-      <div className="flex flex-row">
-        <div className="mt-5 ml-5 text-white text-2xl font-bold">Code to UI</div>
-        <nav>
-          <ul className="flex mt-5 ml-[850px] gap-6 text-white text-lg">
-            <li><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </nav>
-      </div>
+    <div ref={backgroundRef} className="w-full h-screen">
+      {/* Navbar */}
+      <nav className="bg-transparent p-4 shadow-md">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          {/* Logo */}
+          <div className="text-white text-2xl font-bold">
+            <a href="/">Code to UI</a>
+          </div>
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex space-x-6">
+            <a href="#" className="text-white hover:text-gray-200">Home</a>
+            <a href="#about" className="text-white hover:text-gray-200">About</a>
+            <a href="#contact" className="text-white hover:text-gray-200">Contact</a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button className="md:hidden text-white" onClick={() => setShowMenu(!showMenu)}>
+            ☰
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {showMenu && (
+          <div className="md:hidden bg-gray-800 p-4 mt-2">
+            <a href="#" className="block text-white py-2">Home</a>
+            <a href="#about" className="block text-white py-2">About</a>
+            <a href="#contact" className="block text-white py-2">Contact</a>
+          </div>
+        )}
+      </nav>
+
+      {/* Upload Section */}
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray p-8">
-        <div className="w-full max-w-2xl bg-white bg-opacity-[0.8] shadow-md rounded-lg p-8 space-y-6">
+        <div className="w-full max-w-2xl bg-white bg-opacity-80 shadow-md rounded-lg p-8 space-y-6">
           <h2 className="text-2xl font-bold text-center text-gray-800">
             Upload OpenAPI/Swagger JSON
           </h2>
@@ -147,7 +160,7 @@ const uploadFile=async(uploadedFile)=>{
             <p className="text-gray-600">
               {dragging ? "Drop the file here..." : "Drag & Drop your file here or"}
             </p>
-            <label className="bg-[#287063] text-white px-6 py-3 mt-4 rounded-md hover:bg-[#287063] transition cursor-pointer inline-block">
+            <label className="bg-[#287063] text-white px-6 py-3 mt-4 rounded-md hover:bg-[#1e594d] transition cursor-pointer inline-block">
               Choose a File
               <input
                 type="file"
