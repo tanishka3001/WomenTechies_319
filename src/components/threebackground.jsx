@@ -6,12 +6,12 @@ const ThreeBackground = () => {
   return (
     <Canvas 
       style={{
-        position: 'fixed', // Fix canvas to the viewport
+        position: 'fixed', 
         top: 0,
         left: 0,
         width: '100%',
         height: '100%',
-        zIndex: -1, // Ensures it's behind other content
+        zIndex: -1, 
       }}
     >
       <ambientLight intensity={0.5} />

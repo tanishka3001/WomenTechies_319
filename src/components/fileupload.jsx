@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 export default function ApiUploader() {
   const [file, setFile] = useState(null);
@@ -20,12 +21,31 @@ export default function ApiUploader() {
     };
     reader.readAsText(uploadedFile);
   };
+  const uploadFile= async (uploadedFile)=>{
+    const formData = new FormData();
+    formData.append("file", uploadedFile);
+   try{
+    const response = await axios.post("http://localhost:4000/upload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    if(response.status===200){
+      alert("File Uploaded successfully");
+      console.log(response.data.apiData);
+    }
+   }
+   catch (err) {
+    console.error("Upload Error:", err);
+  }
+};
 
   const handleFileUpload = (e) => {
     const uploadedFile = e.target.files[0];
     if (uploadedFile) {
       setFile(uploadedFile);
       handleFileRead(uploadedFile);
+      uploadFile(uploadedFile);
     }
   };
 
@@ -41,7 +61,7 @@ export default function ApiUploader() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-8">
-      <div className="w-full max-w-2xl bg-white shadow-md rounded-lg p-8 space-y-6">
+      <div className="w-full max-w-2xl bg-transparent bg-op shadow-md rounded-lg p-8 space-y-6">
         <h2 className="text-2xl font-bold text-center text-gray-800">
           Upload OpenAPI/Swagger JSON
         </h2>

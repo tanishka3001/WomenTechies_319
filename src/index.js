@@ -1,13 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ApiUploader from "./components/fileupload";
 import Navbar from "./components/navbar";
 import About from "./components/about";
 import Contact from "./components/contact";
-//import ThreeBackground from "./components/contact";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
