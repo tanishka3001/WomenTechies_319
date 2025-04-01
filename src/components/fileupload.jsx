@@ -180,7 +180,7 @@ const uploadFile=async(uploadedFile)=>{
             </div>
           )}
           {/* Added Button */}
-          <button onClick={() => navigate("/apiList",{ state: { apiEndpoints }})} className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition">
+          <button onClick={() => navigate("/apiList",{ state: { apiEndpoints }})} className="w-full bg-[#287063] text-white py-2 px-4 rounded-md hover:bg-[#287063] transition">
             Process JSON
           </button>
         </div>
