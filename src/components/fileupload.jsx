@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useEffect, useRef } from "react";
-
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 export default function ApiUploader() {
+  const navigate= useNavigate();
   const backgroundRef = useRef(null);
+  const [apiEndpoints, setApiEndpoints] = useState([]);
 
   useEffect(() => {
     const threeScript = document.createElement("script");
@@ -72,12 +75,34 @@ export default function ApiUploader() {
     };
     reader.readAsText(uploadedFile);
   };
+const uploadFile=async(uploadedFile)=>{
+  const formData = new FormData();
+  formData.append("file", uploadedFile); // Append the file to FormData
 
+  try {
+    const response = await axios.post("http://localhost:4000/upload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    if(response.status===200)
+      console.log(response.data.apiData);
+    alert("File Uploaded Successfully");
+    setApiEndpoints(response.data.apiData.endpoints);
+    console.log(apiEndpoints);
+    
+  }
+    catch(err){
+      console.log(err);
+    }
+
+};
   const handleFileUpload = (e) => {
     const uploadedFile = e.target.files[0];
     if (uploadedFile) {
       setFile(uploadedFile);
       handleFileRead(uploadedFile);
+      uploadFile(uploadedFile);
     }
   };
 
@@ -92,7 +117,7 @@ export default function ApiUploader() {
   };
 
   return (
-    <div ref={backgroundRef} className="w-full h-screen">
+    <div ref={backgroundRef} className="w-full h-screen overflow-x-hidden">
       <div className="flex flex-row">
         <div className="mt-5 ml-5 text-white text-2xl font-bold">Code to UI</div>
         <nav>
@@ -142,7 +167,7 @@ export default function ApiUploader() {
             </div>
           )}
           {/* Added Button */}
-          <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition">
+          <button onClick={() => navigate("/apiList",{ state: { apiEndpoints }})} className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition">
             Process JSON
           </button>
         </div>

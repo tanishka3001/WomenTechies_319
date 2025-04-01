@@ -2,9 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import ApiUploader from "./components/fileupload";
-import About from "./components/about";
-import Contact from "./components/contact";
+import App from "./App";
 //import AnimatedBackground from "./components/background";
 //import ThreeBackground from "./components/contact";
 
@@ -12,9 +10,7 @@ import Contact from "./components/contact";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ApiUploader />
-    <About />
-    <Contact/>
+   <App />
   </React.StrictMode>
 );
 
