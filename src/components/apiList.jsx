@@ -12,7 +12,7 @@ export default function ApiList() {
         apiEndpoints.map((api, index) => (
           <button
             key={index}
-            onClick={() => navigate("/apiDisplay", { state: { api } })}
+            onClick={() => navigate("/apiDisplay", { state: { api ,apiEndpoints} })}
             className="block mt-4 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
           >
             {api.method} - {api.path}
