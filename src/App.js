@@ -3,6 +3,7 @@ import ApiUploader from "./components/fileupload";
 import About from "./components/about";
 import Contact from "./components/contact";
 import List from "./components/apiList";
+import './App.css';
 
 export default function App() {
   return (

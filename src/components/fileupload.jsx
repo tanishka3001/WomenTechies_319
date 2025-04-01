@@ -86,10 +86,10 @@ const uploadFile=async(uploadedFile)=>{
       },
     });
     if(response.status===200)
-      console.log(response.data.apiData);
+      console.log(response.data.apiData.endpoints);
     alert("File Uploaded Successfully");
     setApiEndpoints(response.data.apiData.endpoints);
-    console.log(apiEndpoints);
+    //console.log(apiEndpoints);
     
   }
     catch(err){
@@ -121,7 +121,7 @@ const uploadFile=async(uploadedFile)=>{
       <div className="flex flex-row">
         <div className="mt-5 ml-5 text-white text-2xl font-bold">Code to UI</div>
         <nav>
-          <ul className="flex mt-5 ml-[1140px] gap-6 text-white text-lg">
+          <ul className="flex mt-5 ml-[850px] gap-6 text-white text-lg">
             <li><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -167,7 +167,7 @@ const uploadFile=async(uploadedFile)=>{
             </div>
           )}
           {/* Added Button */}
-          <button onClick={() => navigate("/apiList",{ state: { apiEndpoints }})} className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition">
+          <button onClick={() => navigate("/apiList",{ state: { apiEndpoints }})} className="w-full bg-[#287063] text-white py-2 px-4 rounded-md hover:bg-blue-700 transition">
             Process JSON
           </button>
         </div>
