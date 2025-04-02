@@ -49,12 +49,13 @@ export default function ApiDisplay() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white">
+    <div className="flex-row overflow-x-hidden bg-black">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white ">
       {/* Heading at the top center */}
-      <h2 className="text-[#8cf5e2] text-4xl font-bold mb-10">API Endpoint Details</h2>
+      <h2 className="text-[#8cf5e2] text-4xl  font-bold mb-10">API Endpoint Details</h2>
 
       {/* Box containing API details */}
-      <div className="p-12 border rounded-lg shadow-lg bg-gray-100 bg-opacity-80 w-[1250px] h-[250px] text-black text-center">
+      <div className="p-12 border rounded-lg shadow-lg bg-gray-100 bg-opacity-80 w-[1150px] h-[250px] text-black text-center">
         <p className="text-xl">
           <strong>Path:</strong> {api.path}
         </p>
@@ -78,11 +79,14 @@ export default function ApiDisplay() {
           <p className="mt-4 text-gray-500">No parameters required.</p>
         )}
       </div>
-
+      </div>
+<div className="bg-black ml-14 w-[1150px]">
       {generatedCode && (
         <div className="mt-6 p-4 bg-gray-800 text-white rounded-lg">
           <h3 className="text-lg font-bold">Generated Code:</h3>
-          <pre className="overflow-x-auto mt-2 p-2 bg-gray-900 rounded">{generatedCode}</pre>
+          <div className="mt-2 p-2 bg-gray-900 rounded overflow-auto max-h-96 w-full">
+        <pre className="whitespace-pre-wrap break-words">{generatedCode}</pre>
+      </div>
           <button 
             onClick={handleDownload} 
             className="mt-4 p-2 bg-green-500 text-white rounded-md hover:bg-green-600"
@@ -92,12 +96,15 @@ export default function ApiDisplay() {
         </div>
       )}
 
-      <button 
-        onClick={() => navigate("/apiList", { state: { apiEndpoints } })} 
-        className="mt-6 p-2 bg-[#287063] text-white rounded-md hover:bg-gray-600"
-      >
-        Back to API List
-      </button>
+<div className="w-full flex justify-center mt-7 mb-14">
+  <button 
+    onClick={() => navigate("/apiList", { state: { apiEndpoints } })} 
+    className="p-2 bg-[#287063] text-white rounded-md hover:bg-gray-600"
+  >
+    Back to API List
+  </button>
+</div>
+      </div>
     </div>
   );
 }
