@@ -3,13 +3,15 @@ const multer = require("multer");
 const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
-const yaml = require("js-yaml"); // To handle YAML files
-
+const yaml = require("js-yaml");
+require("dotenv").config();
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-// Ensure uploads directory exists
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+console.log(process.env.GEMINI_API_KEY );
 const uploadDir = "uploads/";
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);
@@ -83,6 +85,43 @@ app.post("/upload", upload.single("file"), (req, res) => {
         apiData,
     });
 });
+
+app.post("/generate-code", async (req, res) => {
+    const api = req.body.api;
+    if (!api) {
+        return res.status(400).json({ error: "No API data provided" });
+    }
+    const prompt = `
+    Generate a React component using Tailwind CSS and Axios for the following API details:
+    - Path: ${api.path}
+    - Method: ${api.method}
+    - Parameters: ${JSON.stringify(api.parameters || [])}
+    
+    The component should:
+    - Have a button to fetch data from the API.
+    - Display results in a responsive Tailwind-styled table or list.
+    - Handle loading and error states properly.
+    - Use functional React hooks (useState, useEffect).
+    - Be well-structured and formatted.
+
+    Example Output:
+    \`\`\`jsx
+    // Generated code should go here
+    \`\`\`
+    `;
+
+    try {
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        const text = response.text();
+        res.json({ code: text });
+        console.log(text);
+    } catch (error) {
+        console.error("Gemini API Error:", error);
+        res.status(500).json({ error: "Failed to generate code" });
+    }
+});
+
 const PORT = 4000;
 app.listen(PORT, () => {
     console.log(`File Upload Server running on ${PORT}`);

@@ -24,7 +24,7 @@ export default function ApiList() {
             <div
               key={index}
               className="flex items-center justify-between p-4 bg-white shadow-md rounded-lg transition-transform transform hover:scale-105 cursor-pointer"
-              onClick={() => navigate("/apiDisplay", { state: { api } })}
+              onClick={() => navigate("/apiDisplay", { state: { api,apiEndpoints } })}
             >
               <div className="flex items-center space-x-4">
                 <span className={`text-white text-sm font-bold px-3 py-1 rounded-md ${methodColors[api.method] || "bg-gray-500"}`}>
