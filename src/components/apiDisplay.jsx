@@ -51,10 +51,8 @@ export default function ApiDisplay() {
   return (
     <div className="flex-row overflow-x-hidden bg-black">
     <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white ">
-      {/* Heading at the top center */}
       <h2 className="text-[#8cf5e2] text-4xl  font-bold mb-10">API Endpoint Details</h2>
 
-      {/* Box containing API details */}
       <div className="p-12 border rounded-lg shadow-lg bg-gray-100 bg-opacity-80 w-[1150px] h-[250px] text-black text-center">
         <p className="text-xl">
           <strong>Path:</strong> {api.path}

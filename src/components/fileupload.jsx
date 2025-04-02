@@ -68,7 +68,7 @@ export default function ApiUploader() {
   };
 const uploadFile=async(uploadedFile)=>{
   const formData = new FormData();
-  formData.append("file", uploadedFile); // Append the file to FormData
+  formData.append("file", uploadedFile); 
 
   try {
     const response = await axios.post("http://localhost:4000/upload", formData, {
@@ -80,7 +80,6 @@ const uploadFile=async(uploadedFile)=>{
       console.log(response.data.apiData.endpoints);
     alert("File Uploaded Successfully");
     setApiEndpoints(response.data.apiData.endpoints);
-    //console.log(apiEndpoints);
     
   }
     catch(err){
@@ -109,28 +108,23 @@ const uploadFile=async(uploadedFile)=>{
 
   return (
     <div ref={backgroundRef} className="w-full h-screen">
-      {/* Navbar */}
       <nav className="bg-transparent p-4 shadow-md">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          {/* Logo */}
           <div className="text-white text-2xl font-bold">
             <a href="/">Code to UI</a>
           </div>
 
-          {/* Desktop Menu */}
           <div className="hidden md:flex space-x-6">
             <a href="#" className="text-white hover:text-gray-200">Home</a>
             <a href="#about" className="text-white hover:text-gray-200">About</a>
             <a href="#contact" className="text-white hover:text-gray-200">Contact</a>
           </div>
 
-          {/* Mobile Menu Button */}
           <button className="md:hidden text-white" onClick={() => setShowMenu(!showMenu)}>
             ☰
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {showMenu && (
           <div className="md:hidden bg-gray-800 p-4 mt-2">
             <a href="#" className="block text-white py-2">Home</a>
@@ -140,7 +134,6 @@ const uploadFile=async(uploadedFile)=>{
         )}
       </nav>
 
-      {/* Upload Section */}
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray p-8">
         <div className="w-full max-w-2xl bg-white bg-opacity-80 shadow-md rounded-lg p-8 space-y-6">
           <h2 className="text-2xl font-bold text-center text-gray-800">
@@ -179,7 +172,6 @@ const uploadFile=async(uploadedFile)=>{
               <pre className="text-xs">{JSON.stringify(jsonData, null, 2)}</pre>
             </div>
           )}
-          {/* Added Button */}
           <button onClick={() => navigate("/apiList",{ state: { apiEndpoints }})} className="w-full bg-[#287063] text-white py-2 px-4 rounded-md hover:bg-[#287063] transition">
             Process JSON
           </button>

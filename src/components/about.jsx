@@ -5,7 +5,6 @@ export default function About() {
   return (
     <section id="about" className="py-16 bg-black">
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
-        {/* About Title & Description */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-extrabold text-[#8cf5e2]">About Code to UI</h2>
           <p className="mt-4 text-lg text-[#8cf5e2] leading-relaxed max-w-3xl mx-auto">
@@ -14,7 +13,6 @@ export default function About() {
           </p>
         </div>
 
-        {/* Features Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="bg-white p-10 shadow-lg rounded-xl text-center">
             <h3 className="text-2xl font-bold text-gray-900">Our Mission</h3>
@@ -34,7 +32,6 @@ export default function About() {
           </div>
         </div>
 
-        {/* Final Call-to-Action Section */}
         <div className="mt-16 text-center">
           <h3 className="text-3xl font-extrabold text-[#8cf5e2]">Join Us in Making Development Easier</h3>
           <p className="mt-4 text-lg text-[#8cf5e2] leading-relaxed max-w-3xl mx-auto">

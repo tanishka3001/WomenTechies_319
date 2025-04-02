@@ -25,7 +25,6 @@ export default function Contact() {
       setSuccess("");
       return;
     }
-    // Simulate a successful form submission
     setSuccess("Your message has been sent successfully!");
     setError("");
     setFormData({
@@ -38,7 +37,6 @@ export default function Contact() {
   return (
     <section id="contact" className="py-20 bg-black">
       <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
-        {/* Section Heading */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-extrabold text-[#8cf5e2]">Contact Us</h2>
           <p className="mt-4 text-lg text-[#8cf5e2]">
@@ -46,11 +44,9 @@ export default function Contact() {
           </p>
         </div>
 
-        {/* Contact Form */}
         <div className="bg-white shadow-lg rounded-2xl p-10 max-w-2xl mx-auto border border-gray-200">
           <form onSubmit={handleSubmit}>
             <div className="space-y-6">
-              {/* Name Input */}
               <div className="relative">
                 <input
                   type="text"
@@ -69,7 +65,6 @@ export default function Contact() {
                 </label>
               </div>
 
-              {/* Email Input */}
               <div className="relative">
                 <input
                   type="email"
@@ -88,7 +83,6 @@ export default function Contact() {
                 </label>
               </div>
 
-              {/* Message Input */}
               <div className="relative">
                 <textarea
                   name="message"
@@ -107,11 +101,9 @@ export default function Contact() {
                 </label>
               </div>
 
-              {/* Form Messages */}
               {error && <p className="text-red-500 text-sm">{error}</p>}
               {success && <p className="text-green-500 text-sm">{success}</p>}
 
-              {/* Submit Button */}
               <div className="text-center">
                 <button
                   type="submit"
@@ -124,7 +116,6 @@ export default function Contact() {
           </form>
         </div>
 
-        {/* Additional Contact Info */}
         <div className="mt-16 text-center">
           <h3 className="text-lg text-[#8cf5e2]">
             Other Ways to Reach Us

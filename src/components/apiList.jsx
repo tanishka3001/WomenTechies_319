@@ -1,10 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
+import { useEffect,useState } from "react";
 
 export default function ApiList() {
   const location = useLocation();
   const navigate = useNavigate();
-  const apiEndpoints = location.state?.apiEndpoints || [];
 
   const methodColors = {
     GET: "bg-[#287063]",
@@ -13,15 +13,24 @@ export default function ApiList() {
     DELETE: "bg-[#287063]",
     PATCH: "bg-[#287063]",
   };
+  const [apiEndpoints, setApiEndpoints] = useState(null);
+
+  useEffect(() => {
+    if (location.state?.apiEndpoints) {
+      setApiEndpoints(location.state.apiEndpoints);
+      localStorage.getItem("endpoint",apiEndpoints);
+    }
+  }, [location.state]);
+
+  if (apiEndpoints === null) {
+    return <div className="text-white flex justify-center items-center min-h-screen">Loading...</div>;
+  }
 
   return (
     <div className="p-8 min-h-screen bg-black flex flex-col justify-start items-center">
-      {/* Heading - Fixed at the Top Center */}
       <h2 className="text-5xl font-bold text-[#8cf5e2] mt-10 text-center">
         API Endpoints
       </h2>
-
-      {/* API Endpoints List - Centered */}
       <div className="flex-grow flex items-center justify-center w-full">
         {apiEndpoints.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 place-items-center">

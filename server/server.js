@@ -17,7 +17,6 @@ if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);
 }
 
-// Multer storage setup
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "uploads/"); 
@@ -29,16 +28,15 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Function to parse Swagger JSON/YAML and extract endpoints
 function parseSwaggerFile(filePath) {
     try {
         const fileContent = fs.readFileSync(filePath, "utf8");
 
         let apiSpec;
         if (filePath.endsWith(".yaml") || filePath.endsWith(".yml")) {
-            apiSpec = yaml.load(fileContent); // Parse YAML
+            apiSpec = yaml.load(fileContent); 
         } else {
-            apiSpec = JSON.parse(fileContent); // Parse JSON
+            apiSpec = JSON.parse(fileContent); 
         }
 
         const extractedData = {
@@ -66,7 +64,6 @@ function parseSwaggerFile(filePath) {
     }
 }
 
-// Upload and parse API spec
 app.post("/upload", upload.single("file"), (req, res) => {
     if (!req.file) {
         return res.status(400).json({ message: "No file uploaded!" });
