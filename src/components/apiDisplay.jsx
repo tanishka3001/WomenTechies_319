@@ -1,10 +1,38 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function ApiDisplay() {
   const location = useLocation();
   const navigate = useNavigate();
   const api = location.state?.api;
   const apiEndpoints = location.state?.apiEndpoints;
+  const [generatedCode, setGeneratedCode] = useState("");
+
+  useEffect(() => {
+    const fetchGeneratedCode = async () => {
+      try {
+        const response = await axios.post("http://localhost:4000/generate-code", { api });
+        setGeneratedCode(response.data.code);
+      } catch (error) {
+        console.error("Error generating code:", error);
+      }
+    };
+
+    if (api) {
+      fetchGeneratedCode();
+    }
+  }, [api]);
+
+  const handleDownload = () => {
+    const blob = new Blob([generatedCode], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "generated_code.js";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   if (!api) {
     return (
@@ -66,6 +94,25 @@ export default function ApiDisplay() {
           Download
         </button>
       </div>
+      {generatedCode && (
+        <div className="mt-6 p-4 bg-gray-800 text-white rounded-lg">
+          <h3 className="text-lg font-bold">Generated Code:</h3>
+          <pre className="overflow-x-auto mt-2 p-2 bg-gray-900 rounded">{generatedCode}</pre>
+          <button 
+            onClick={handleDownload} 
+            className="mt-4 p-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+          >
+            Download Code
+          </button>
+        </div>
+      )}
+
+      <button 
+        onClick={() => navigate("/apiList", { state: { apiEndpoints } })} 
+        className="mt-6 p-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+      >
+        Back to API List
+      </button>
     </div>
   );
 }
