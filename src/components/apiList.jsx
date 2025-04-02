@@ -18,7 +18,6 @@ export default function ApiList() {
   useEffect(() => {
     if (location.state?.apiEndpoints) {
       setApiEndpoints(location.state.apiEndpoints);
-      localStorage.getItem("endpoint",apiEndpoints);
     }
   }, [location.state]);
 

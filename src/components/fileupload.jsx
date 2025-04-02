@@ -80,6 +80,7 @@ const uploadFile=async(uploadedFile)=>{
       console.log(response.data.apiData.endpoints);
     alert("File Uploaded Successfully");
     setApiEndpoints(response.data.apiData.endpoints);
+    localStorage.setItem("ApiEP",response.data.apiData.endpoints);
     
   }
     catch(err){
