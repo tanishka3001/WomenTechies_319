@@ -59,7 +59,7 @@ export default function ApiDisplay() {
           <strong>Path:</strong> {api.path}
         </p>
         <p className="text-xl">
-          <strong>Method:</strong> <span className="uppercase text-blue-600">{api.method}</span>
+          <strong>Method:</strong> <span className="uppercase text-blue-800">{api.method}</span>
         </p>
         <p className="text-xl">
           <strong>Summary:</strong> {api.summary || "No description provided"}
@@ -79,21 +79,6 @@ export default function ApiDisplay() {
         )}
       </div>
 
-      {/* Buttons centered below the box */}
-      <div className="mt-8 flex space-x-8">
-        <button
-          onClick={() => navigate("/apiList", { state: { apiEndpoints } })}
-          className="p-5 bg-[#287063] text-white rounded-md hover:bg-gray-600"
-        >
-          Back to API List
-        </button>
-        <button
-          onClick={() => navigate("/apiList", { state: { apiEndpoints } })}
-          className="p-5 bg-[#287063] text-white rounded-md hover:bg-gray-600"
-        >
-          Download
-        </button>
-      </div>
       {generatedCode && (
         <div className="mt-6 p-4 bg-gray-800 text-white rounded-lg">
           <h3 className="text-lg font-bold">Generated Code:</h3>
@@ -109,7 +94,7 @@ export default function ApiDisplay() {
 
       <button 
         onClick={() => navigate("/apiList", { state: { apiEndpoints } })} 
-        className="mt-6 p-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+        className="mt-6 p-2 bg-[#287063] text-white rounded-md hover:bg-gray-600"
       >
         Back to API List
       </button>
